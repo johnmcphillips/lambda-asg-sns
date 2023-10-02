@@ -11,21 +11,22 @@ http = urllib3.PoolManager()
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+
 def lambda_handler(event, context):
-    url = "https://hooks.slack.com/services/xxxxxxxx"
+    url = "https://hooks.slack.com/services/xxxx/xxxx/xxxx"
     headers = {
         "Content-Type": "application/json"
     }
     
-    logger.info("Event: " + str(event))
     message = event['Records'][0]['Sns']['Message']
+    logger.info("Event: " + str(event))
     logger.info("Message: " + str(message))
-
+    
     message = ast.literal_eval(event['Records'][0]['Sns']['Message'])
     reason = message['Cause']
     
     msg = json.dumps({
-        "channel": "#channel",
+        "channel": "#your-channel",
         "username": "username",
         "text": reason,
         "icon_emoji": ":ghost:"
